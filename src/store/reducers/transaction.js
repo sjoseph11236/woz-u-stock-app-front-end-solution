@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import API_URL from '../../script/api';
 /**
  * ACTION TYPES
  */
@@ -61,7 +61,7 @@ export const clearTransactions = () => {
 export const getPurchaseTickerDataThunk = symbols => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/iex/stock/${symbols}`);
+      const { data } = await axios.get(`${API_URL}/api/iex/stock/${symbols}`);
       dispatch(gotPurchase(data[0]));
     } catch (error) {
       dispatch(gotError("Ticker symbol doesn't exisit, Try different one"));
@@ -76,7 +76,7 @@ export const getPurchaseTickerDataThunk = symbols => {
 export const getTransactionsThunk = userId => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/transactions/${userId}`)
+      const { data } = await axios.get(`${API_URL}/api/transactions/${userId}`)
       dispatch(gotTransactions(data));
     } catch (error) {
       console.error(error);
@@ -87,7 +87,7 @@ export const getTransactionsThunk = userId => {
 export const addTransactionThunk = transaction => {
   return async dispatch => {
     try {
-      const { data } = await axios.post('/api/transactions/', transaction);
+      const { data } = await axios.post(`${API_URL}/api/transactions/`, transaction);
       dispatch(gotTransactions(data));
     } catch (error) {
       console.error(error);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import colorize from '../../script/helper';
+import API_URL from '../../script/api';
 import { updateData } from '../../script/helper';
 /**
  * ACTION TYPES
@@ -57,7 +58,7 @@ export const clearPortfolio = () => {
 export const getPortfolioThunk = userId => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/portfolio/${userId}`);
+      const { data } = await axios.get(`${API_URL}/api/portfolio/${userId}`);
       const symbols = data.symbols;
       const stocks = data.stocks;
       dispatch(updatePortfolio({ symbols, stocks }))
@@ -72,7 +73,7 @@ export const getPortfolioThunk = userId => {
 export const getPortfolioStockData = (symbols, stocks) => {
   return async dispatch => { 
     try {
-      const { data } = await axios.get(`/api/iex/stock/${symbols}`);   
+      const { data } = await axios.get(`${API_URL}/api/iex/stock/${symbols}`);   
       const updatedData = updateData(data, stocks);
       const colorizedData = colorize(updatedData.data);
       dispatch(gotPortfolio(colorizedData));   
@@ -86,7 +87,7 @@ export const getPortfolioStockData = (symbols, stocks) => {
 export const updatePortfolioThunk = purchasedStock => { 
   return async dispatch => { 
     try {
-      const { data } = await axios.post('/api/portfolio', purchasedStock);
+      const { data } = await axios.post(`${API_URL}/api/portfolio`, purchasedStock);
       const symbols = data.symbols;
       const stocks = data.stocks;
       dispatch(updatePortfolio({ symbols, stocks }))

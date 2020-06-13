@@ -58,7 +58,7 @@ class SignIn extends Component {
               
               <div className="field is-grouped">
                 <div className="control">
-                  <button className="button is-link">Send</button>
+                  <button id="send" className="button is-link">Send</button>
                   <div>
                     <br/>
                     <Link to='/register'>

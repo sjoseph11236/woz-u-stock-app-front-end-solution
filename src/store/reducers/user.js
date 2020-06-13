@@ -1,4 +1,5 @@
 import axios from 'axios';
+import API_URL from '../../script/api';
 import history from '../../history';
 /**
  * ACTION TYPES
@@ -34,7 +35,7 @@ export const me = () => async dispatch => {
 export const auth = (name, email, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, { name, email, password });
+    res = await axios.post(`${API_URL}/auth/${method}`, { name, email, password });
     dispatch(getUser(res.data))
     history.push('/');
   } catch (authError) {
@@ -48,7 +49,7 @@ export const auth = (name, email, password, method) => async dispatch => {
 
 export const logout = () => async dispatch => {
   try {
-    await axios.post('/auth/logout')
+    await axios.post(`${API_URL}/auth/logout`)
     dispatch(removeUser())
     history.push('/signin');
   } catch (err) {
@@ -60,7 +61,7 @@ export const purchaseThunk = amount => async (dispatch, getState) => {
   try {
     const { user } = getState();
     const difference = user.cash - amount;
-    const { data } = await axios.put(`/api/user/${user.id}`, { cash: difference });
+    const { data } = await axios.put(`${API_URL}/api/user/${user.id}`, { cash: difference });
     dispatch(purchase(data.cash));
   } catch (err) {
     console.error(err);

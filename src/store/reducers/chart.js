@@ -1,5 +1,6 @@
 import axios from 'axios';
 import colorize from '../../script/helper';
+import API_URL from '../../script/api';
 /**
  * ACTION TYPES
  */
@@ -31,7 +32,8 @@ const gotChart = chart => {
 export const getChartThunk = (symbols = 'aapl,amzn,fb,msft') => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/iex/stock/${symbols}`);
+      const { data } = await axios.get(`${API_URL}/api/iex/stock/${symbols}`);
+      console.log('here', data)
       const colorizedData = colorize(data);
       dispatch(gotChart(colorizedData));
     } catch (error) {

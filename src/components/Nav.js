@@ -11,7 +11,7 @@ const Nav = ({ handleClick , isLoggedIn, name }) => {
       {isLoggedIn ? (
         <nav className="level">
           <div className="level-left">
-            <h1 className="level-item title is-4">Welcome, {name}!</h1>
+            <h1 id="welcome" className="level-item title is-4">Welcome, {name}!</h1>
           </div>
           <div className="level-right">
             <p className="level-item">
@@ -25,7 +25,7 @@ const Nav = ({ handleClick , isLoggedIn, name }) => {
               </Link>
             </p>
             <p className="level-item">
-              <Link to='/transactions'>
+              <Link id="transactions" to='/transactions'>
                 <u>Transcations</u> 
               </Link>
             </p>
@@ -43,12 +43,12 @@ const Nav = ({ handleClick , isLoggedIn, name }) => {
               </Link>
             </p>
             <p className="level-item">
-              <Link to='/signin'>
+              <Link id="signin" to='/signin'>
                 <u>Sign In</u>
               </Link>
             </p>
             <p className="level-item">
-              <Link to='/register'>
+              <Link id="register" to='/register'>
                 <u>register</u> 
               </Link>
             </p>
